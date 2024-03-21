@@ -35,6 +35,10 @@ public class TournamentPlayersService {
         return tournamentPlayersRepository.findByPlayerId(id);
     }
 
+    public List<TournamentPlayersModel> findByTournamentId(UUID id) {
+        return tournamentPlayersRepository.findByTournamentId(id);
+    }
+
     @Transactional
     public void delete(TournamentPlayersModel tournamentPlayersModel) {
         tournamentPlayersRepository.delete(tournamentPlayersModel);

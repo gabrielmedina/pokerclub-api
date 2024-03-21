@@ -40,8 +40,13 @@ public class TournamentPlayersController {
     }
 
     @GetMapping("/player/{id}")
-    public ResponseEntity<Object> getTournamentsByPlayer(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getTournamentPlayersByPlayer(@PathVariable(value = "id") UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentPlayersService.findByPlayerId(id));
+    }
+
+    @GetMapping("/tournament/{id}")
+    public ResponseEntity<Object> getTournamentPlayersByTournament(@PathVariable(value = "id") UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentPlayersService.findByTournamentId(id));
     }
 
     @PostMapping
