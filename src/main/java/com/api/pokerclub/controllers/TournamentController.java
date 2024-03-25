@@ -1,7 +1,6 @@
 package com.api.pokerclub.controllers;
 
 import com.api.pokerclub.dtos.TournamentDto;
-import com.api.pokerclub.models.PlayerModel;
 import com.api.pokerclub.models.TournamentModel;
 import com.api.pokerclub.services.TournamentService;
 import jakarta.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;

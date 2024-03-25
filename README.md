@@ -36,3 +36,14 @@
 | `POST`   | /tournaments-players/tournament/{tournamentId}/player/{playerId}  | Cria um registro de um jogador em um torneio                        |
 | `PUT`    | /tournaments-players/tournament/{tournamentId}/player/{playerId}  | Atualiza um registro de um jogador de um torneio                    |
 | `DELETE` | /tournaments-players/tournament/{tournamentId}/player/{playerId}  | Remove um registro de um jogador de um torneio                      |
+
+### Ranking
+
+| Method   | URL                                      | Description                    |
+|----------|------------------------------------------|--------------------------------|
+| `GET`    | /ranking                                 | Retorna todos os rankings      |
+| `GET`    | /ranking/{id}                            | Retorna um ranking             |
+| `POST`   | /ranking                                 | Cria um ranking                |
+| `PUT`    | /ranking/{id}                            | Atualiza um ranking            |
+| `PUT`    | /ranking/{id}/tournament/{tournamentId}  | Adiciona um torneio no ranking |
+| `DELETE` | /ranking/{id}                            | Remove um ranking              |
