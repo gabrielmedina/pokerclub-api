@@ -1,6 +1,6 @@
 package com.api.pokerclub.dtos;
 
-import com.api.pokerclub.models.TournamentPlayersModel;
+import com.api.pokerclub.models.TournamentsPlayersModel;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,7 +18,7 @@ public class TournamentDto {
 
     private LocalDateTime finishedAt;
 
-    private Set<TournamentPlayersModel> tournamentPlayers;
+    private Set<TournamentsPlayersModel> tournamentsPlayers;
 
     public String getTitle() {
         return title;
@@ -52,11 +52,11 @@ public class TournamentDto {
         this.finishedAt = finishedAt;
     }
 
-    public Set<TournamentPlayersModel> getTournamentPlayers() {
-        return tournamentPlayers;
+    public Set<TournamentsPlayersModel> getTournamentsPlayers() {
+        return tournamentsPlayers;
     }
 
-    public void setTournamentPlayers(Set<TournamentPlayersModel> tournamentPlayers) {
-        this.tournamentPlayers = tournamentPlayers;
+    public void setTournamentsPlayers(Set<TournamentsPlayersModel> tournamentsPlayers) {
+        this.tournamentsPlayers = tournamentsPlayers;
     }
 }

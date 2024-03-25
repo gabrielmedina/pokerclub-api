@@ -1,8 +1,7 @@
 package com.api.pokerclub.services;
 
-import com.api.pokerclub.models.PlayerModel;
-import com.api.pokerclub.models.TournamentPlayersModel;
-import com.api.pokerclub.repositories.TournamentPlayersRepository;
+import com.api.pokerclub.models.TournamentsPlayersModel;
+import com.api.pokerclub.repositories.TournamentsPlayersRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,33 +13,33 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class TournamentPlayersService {
+public class TournamentsPlayersService {
     @Autowired
-    TournamentPlayersRepository tournamentPlayersRepository;
+    TournamentsPlayersRepository tournamentPlayersRepository;
 
     @Transactional
-    public TournamentPlayersModel save(TournamentPlayersModel tournamentPlayersModel) {
+    public TournamentsPlayersModel save(TournamentsPlayersModel tournamentPlayersModel) {
         return tournamentPlayersRepository.save(tournamentPlayersModel);
     }
 
-    public Page<TournamentPlayersModel> findAll(Pageable pageable) {
+    public Page<TournamentsPlayersModel> findAll(Pageable pageable) {
         return tournamentPlayersRepository.findAll(pageable);
     }
 
-    public Optional<TournamentPlayersModel> findById(UUID id) {
+    public Optional<TournamentsPlayersModel> findById(UUID id) {
         return tournamentPlayersRepository.findById(id);
     }
 
-    public List<TournamentPlayersModel> findByPlayerId(UUID id) {
+    public List<TournamentsPlayersModel> findByPlayerId(UUID id) {
         return tournamentPlayersRepository.findByPlayerId(id);
     }
 
-    public List<TournamentPlayersModel> findByTournamentId(UUID id) {
+    public List<TournamentsPlayersModel> findByTournamentId(UUID id) {
         return tournamentPlayersRepository.findByTournamentId(id);
     }
 
     @Transactional
-    public void delete(TournamentPlayersModel tournamentPlayersModel) {
+    public void delete(TournamentsPlayersModel tournamentPlayersModel) {
         tournamentPlayersRepository.delete(tournamentPlayersModel);
     }
 }

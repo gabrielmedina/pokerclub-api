@@ -1,11 +1,8 @@
 package com.api.pokerclub.dtos;
 
-import com.api.pokerclub.models.PlayerModel;
-import com.api.pokerclub.models.TournamentModel;
-
 import java.util.UUID;
 
-public class TournamentPlayersDto {
+public class TournamentsPlayersDto {
     private UUID player;
     private UUID tournament;
     private double prize;
