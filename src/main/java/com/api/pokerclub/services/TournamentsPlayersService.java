@@ -15,31 +15,31 @@ import java.util.UUID;
 @Service
 public class TournamentsPlayersService {
     @Autowired
-    TournamentsPlayersRepository tournamentPlayersRepository;
+    TournamentsPlayersRepository tournamentsPlayersRepository;
 
     @Transactional
     public TournamentsPlayersModel save(TournamentsPlayersModel tournamentPlayersModel) {
-        return tournamentPlayersRepository.save(tournamentPlayersModel);
+        return tournamentsPlayersRepository.save(tournamentPlayersModel);
     }
 
     public Page<TournamentsPlayersModel> findAll(Pageable pageable) {
-        return tournamentPlayersRepository.findAll(pageable);
-    }
-
-    public Optional<TournamentsPlayersModel> findById(UUID id) {
-        return tournamentPlayersRepository.findById(id);
+        return tournamentsPlayersRepository.findAll(pageable);
     }
 
     public List<TournamentsPlayersModel> findByPlayerId(UUID id) {
-        return tournamentPlayersRepository.findByPlayerId(id);
+        return tournamentsPlayersRepository.findByPlayerId(id);
     }
 
     public List<TournamentsPlayersModel> findByTournamentId(UUID id) {
-        return tournamentPlayersRepository.findByTournamentId(id);
+        return tournamentsPlayersRepository.findByTournamentId(id);
+    }
+
+    public Optional<TournamentsPlayersModel> findByTournamentIdAndPlayerId(UUID tournamentId, UUID playerId) {
+        return tournamentsPlayersRepository.findByTournamentIdAndPlayerId(tournamentId, playerId);
     }
 
     @Transactional
     public void delete(TournamentsPlayersModel tournamentPlayersModel) {
-        tournamentPlayersRepository.delete(tournamentPlayersModel);
+        tournamentsPlayersRepository.delete(tournamentPlayersModel);
     }
 }

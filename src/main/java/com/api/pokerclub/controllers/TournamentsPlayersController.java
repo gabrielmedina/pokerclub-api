@@ -37,23 +37,40 @@ public class TournamentsPlayersController {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersService.findAll(pageable));
     }
 
-    @GetMapping("/player/{id}")
-    public ResponseEntity<Object> getTournamentsPlayersByPlayer(@PathVariable(value = "id") UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersService.findByPlayerId(id));
+    @GetMapping("/player/{playerId}")
+    public ResponseEntity<Object> getTournamentsPlayersByPlayer(@PathVariable(value = "playerId") UUID playerId) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersService.findByPlayerId(playerId));
     }
 
-    @GetMapping("/tournament/{id}")
-    public ResponseEntity<Object> getTournamentsPlayersByTournament(@PathVariable(value = "id") UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersService.findByTournamentId(id));
+    @GetMapping("/tournament/{tournamentId}")
+    public ResponseEntity<Object> getTournamentsPlayersByTournament(
+            @PathVariable(value = "tournamentId") UUID tournamentId) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersService.findByTournamentId(tournamentId));
     }
 
-    @PostMapping
-    public ResponseEntity<Object> saveTournamentsPlayers(@RequestBody @Valid TournamentsPlayersDto tournamentsPlayersDto) {
+    @GetMapping("/tournament/{tournamentId}/player/{playerId}")
+    public ResponseEntity<Object> getTournamentsPlayersByTournamentAndPlayer(
+            @PathVariable(value = "tournamentId") UUID tournamentId,
+            @PathVariable(value = "playerId") UUID playerId) {
+        Optional<TournamentsPlayersModel> tournamentsPlayersModelOptional = tournamentsPlayersService.findByTournamentIdAndPlayerId(tournamentId, playerId);
+
+        if (!tournamentsPlayersModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tournament with player not found.");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersModelOptional.get());
+    }
+
+    @PostMapping("/tournament/{tournamentId}/player/{playerId}")
+    public ResponseEntity<Object> saveTournamentsPlayers(
+            @PathVariable(value = "tournamentId") UUID tournamentId,
+            @PathVariable(value = "playerId") UUID playerId,
+            @RequestBody @Valid TournamentsPlayersDto tournamentsPlayersDto) {
         var tournamentsPlayersModel = new TournamentsPlayersModel();
         BeanUtils.copyProperties(tournamentsPlayersDto, tournamentsPlayersModel);
 
-        var player = playerService.findById(tournamentsPlayersDto.getPlayer());
-        var tournament = tournamentService.findById(tournamentsPlayersDto.getTournament());
+        var player = playerService.findById(playerId);
+        var tournament = tournamentService.findById(tournamentId);
 
         if (player.isPresent() && tournament.isPresent()) {
             tournamentsPlayersModel.setPlayer(player.get());
@@ -65,30 +82,36 @@ public class TournamentsPlayersController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tournament or player not found.");
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteTournamentsPlayers(@PathVariable(value = "id") UUID id) {
-        Optional<TournamentsPlayersModel> tournamentsPlayersModelOptional = tournamentsPlayersService.findById(id);
+    @DeleteMapping("/tournament/{tournamentId}/player/{playerId}")
+    public ResponseEntity<Object> deleteTournamentsPlayers(
+            @PathVariable(value = "tournamentId") UUID tournamentId,
+            @PathVariable(value = "playerId") UUID playerId) {
+        Optional<TournamentsPlayersModel> tournamentsPlayersModelOptional = tournamentsPlayersService.findByTournamentIdAndPlayerId(tournamentId, playerId);
 
         if (!tournamentsPlayersModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tournament not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tournament with player not found.");
         }
 
         tournamentsPlayersService.delete(tournamentsPlayersModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Player removed from tournament.");
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> putTournamentsPlayers(@PathVariable(value = "id") UUID id,
-                                                @RequestBody @Valid TournamentsPlayersDto tournamentsPlayersDto) {
-        Optional<TournamentsPlayersModel> tournamentsPlayersModelOptional = tournamentsPlayersService.findById(id);
+    @PutMapping("/tournament/{tournamentId}/player/{playerId}")
+    public ResponseEntity<Object> putTournamentsPlayers(
+            @PathVariable(value = "tournamentId") UUID tournamentId,
+            @PathVariable(value = "playerId") UUID playerId,
+            @RequestBody @Valid TournamentsPlayersDto tournamentsPlayersDto) {
+        Optional<TournamentsPlayersModel> tournamentsPlayersModelOptional = tournamentsPlayersService.findByTournamentIdAndPlayerId(tournamentId, playerId);
 
         if (!tournamentsPlayersModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tournament not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tournament with player not found.");
         }
 
         var tournamentsPlayersModel = new TournamentsPlayersModel();
         BeanUtils.copyProperties(tournamentsPlayersDto, tournamentsPlayersModel);
         tournamentsPlayersModel.setId(tournamentsPlayersModelOptional.get().getId());
+        tournamentsPlayersModel.setPlayer(tournamentsPlayersModelOptional.get().getPlayer());
+        tournamentsPlayersModel.setTournament(tournamentsPlayersModelOptional.get().getTournament());
 
         return ResponseEntity.status(HttpStatus.OK).body(tournamentsPlayersService.save(tournamentsPlayersModel));
     }
