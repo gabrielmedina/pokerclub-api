@@ -1,5 +1,8 @@
 # PokerClub REST API
 
+## Model
+![image](https://github.com/gabrielmedina/pokerclub-api/assets/2979365/c4ca7fe5-7fce-4aa5-b394-c5022fa1a593)
+
 ## Methods
 
 ### Players
