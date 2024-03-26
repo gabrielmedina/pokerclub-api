@@ -41,9 +41,9 @@
 
 | Method   | URL                                      | Description                    |
 |----------|------------------------------------------|--------------------------------|
-| `GET`    | /ranking                                 | Retorna todos os rankings      |
-| `GET`    | /ranking/{id}                            | Retorna um ranking             |
-| `POST`   | /ranking                                 | Cria um ranking                |
-| `PUT`    | /ranking/{id}                            | Atualiza um ranking            |
-| `PUT`    | /ranking/{id}/tournament/{tournamentId}  | Adiciona um torneio no ranking |
-| `DELETE` | /ranking/{id}                            | Remove um ranking              |
+| `GET`    | /rankings                                | Retorna todos os rankings      |
+| `GET`    | /rankings/{id}                           | Retorna um ranking             |
+| `POST`   | /rankings                                | Cria um ranking                |
+| `PUT`    | /rankings/{id}                           | Atualiza um ranking            |
+| `PUT`    | /rankings/{id}/tournament/{tournamentId} | Adiciona um torneio no ranking |
+| `DELETE` | /rankings/{id}                           | Remove um ranking              |

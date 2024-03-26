@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/ranking")
+@RequestMapping("/rankings")
 public class RankingController {
     @Autowired
     RankingService rankingService;
